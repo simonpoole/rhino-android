@@ -64,4 +64,12 @@ public class AndroidContextFactory extends ContextFactory {
         super.onContextReleased(cx);
         ((BaseAndroidClassLoader) cx.getApplicationClassLoader()).reset();
     }
+
+    @Override
+    protected boolean hasFeature(Context cx, int featureIndex) {
+        if (featureIndex == Context.FEATURE_ENABLE_XML_SECURE_PARSING) {
+            return false;
+        }
+        return super.hasFeature(cx, featureIndex);
+    }
 }
